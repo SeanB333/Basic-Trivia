@@ -1,15 +1,17 @@
 $(document).ready(function () {
 
 
+    
 
-
-    var questionArray = ["Who hit the first home run at new yankees stadium",
+    var questionArray = [
+        "Who hit the first home run at new yankees stadium",
         "Before switching to 23, what number did Don Mattingly wear",
         "Who was the longest tenured Yankee Captian",
         "This Yankee was the first relief pitcher to win the American League Cy Young Award",
         "Whose errant throw did Jeter save on the Flip Play in the 2001 division series?"
 
     ];
+
     var answerArray = [
         ["Derek Jeter", "Jorge Posada", "Alex Rodriguez", "Hideki Matsui"],
         ["33", "46", "2", "21"],
@@ -17,6 +19,15 @@ $(document).ready(function () {
         ["Rich Gossage", "Mariano Rivera", "Sparky Lyle", "Mark Teixeira"],
         ["David Justice", "Shane Spencer", "Gerald Williams", "Paul O Niel"]
     ];
+
+    var imageArray = [
+        "<img src='../images/jorge.jpg' height='200px' width='200px'>",
+        "<img src='../images/don.jpg' height='200px' width='200px'>",
+        "<img src='../images/jeter.jpg' height='200px' width='200px'>",
+        "<img src='../images/spark.jpg' height='200px' width='200px'>",
+        "<img src='../images/Shane.jpg' height='200px' width='200px'>"
+    ];
+
     var correctAnswerArray = ["Jorge Posada", "46", "Derek Jeter", "Sparky Lyle", "Shane Spencer"];
     var right = 0;
     var wrong = 0;
@@ -63,25 +74,27 @@ $(document).ready(function () {
 
     function guessRight() {
         right++;
-        gameBoxRight = "<p><h1>Correct</h1></p><p><h3>The answer is :" + correctAnswerArray[qCounter] + "</h3></p>";
+        gameBoxRight = "<p><h1>Correct</h1></p><p><h3>The answer is : " + correctAnswerArray[qCounter] + "</h3></p><a>" + imageArray[qCounter] + "</a>";
         $("#container").html(gameBoxRight);
-        setTimeout(count, 5000);
+        setTimeout(count, 3000);
 
     }
 
     function guessWrong() {
         wrong++;
-        gameBoxWrong = "<p><h1>Wrong Answer</h1></p><p><h3>The Correct Answer is:" + correctAnswerArray[qCounter] + "</h3></p>";
+        gameBoxWrong = "<p><h1>Wrong Answer</h1></p><p><h3>The Correct Answer is : " + correctAnswerArray[qCounter] + "</h3></p><a>" + imageArray[qCounter] + "</a>";
         $("#container").html(gameBoxWrong);
-        setTimeout(count, 5000);
+        setTimeout(count, 3000);
     }
 
     function count() {
-        if (qCounter < 5) {
+        if (qCounter < 4) {
             qCounter++;
             timer();
             questionBox();
             timeLeft = 30;
+        } else {
+            endGame();
         }
     }
 
@@ -90,6 +103,11 @@ $(document).ready(function () {
         $("#container").html(gameBox);
 
 
+    }
+
+    function endGame() {
+        endBox = "<p><h1>Results</h1></p><p><h3>Right : " + right + "</h3></p><p><h3>Wrong : " + wrong + "</h3></p><p><a class='btn btn-danger btn-lg btn-block reset-button' href='#' role='button'>Restart</a></p>";
+        $("#container").html(endBox);
     }
     // initialize game screen
     $("#container").on("click", ".start", function () {
@@ -111,7 +129,10 @@ $(document).ready(function () {
             clearInterval(counter);
             guessWrong();
         }
-
+        // reset the game
+        $("#container").on("click", ".reset-button", function () {
+            reset();
+        });
     });
 
 
