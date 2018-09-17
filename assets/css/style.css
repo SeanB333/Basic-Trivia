@@ -15,26 +15,3 @@ body {
     padding: 1%;
 }
 
-#timer {
-    background-color: blue;
-    height: 50px;
-    width: 50%;
-    margin: auto;
-    margin-top: 5%;
-}
-
-#text {
-    background-color: blueviolet;
-    height: 50px;
-    width: 50%;
-    margin: auto;
-    margin-top: 5%;
-}
-
-#button {
-    background-color: red;
-    height: 50px;
-    width: 50%;
-    margin: auto;
-    margin-top: 5%;
-}
